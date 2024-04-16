@@ -24,14 +24,14 @@ function Mint() {
 
         console.log(`Minting ${mintAmount} NFT(s) at ${mintPrice} ETH each.`);
         try {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = provider.getSigner(defaultAccount);
             const contractAddress = ""; // 컨트랙트 주소 추가
             const contractABI = ""; // ABI 추가
             const nftContract = new ethers.Contract(contractAddress, contractABI, signer);
 
             const transaction = await nftContract.mint(mintAmount, {
-                value: ethers.utils.parseEther((mintPrice * mintAmount).toString())
+                value: ethers.parseEther((mintPrice * mintAmount).toString())
             });
             await transaction.wait();
             console.log("NFT minting success");
