@@ -30,6 +30,7 @@ function Mint() {
             const contractABI = ""; // ABI 추가
             const nftContract = new ethers.Contract(contractAddress, contractABI, signer);
 
+            alert("Mint 트랜잭션 발생");
             const transaction = await nftContract.mint(mintAmount, {
                 value: ethers.parseEther((mintPrice * mintAmount).toString())
             });
