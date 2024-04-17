@@ -20,6 +20,9 @@ function Navibar(props) {
                         <Link to="/funding">Funding</Link>
                     </li>
                     <li>
+                        <Link to="/mint">Mint</Link>
+                    </li>
+                    <li>
                         <MetaMask />
                     </li>
                 </ul>

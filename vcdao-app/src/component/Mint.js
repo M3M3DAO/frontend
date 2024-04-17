@@ -43,7 +43,6 @@ function Mint() {
 
     return (
         <div className="mint-container">
-            <MetaMask setDefaultAccount={setDefaultAccount}/>
             <div className="mint-body">
                 <div className="mint-header">
                     <p>NFT Mint</p>
