@@ -44,23 +44,30 @@ function Mint() {
     return (
         <div className="mint-container">
             <div className="mint-body">
-                <div className="mint-header">
-                    <p>NFT Mint</p>
+                <div className="mint-body1">
+                    <img className="logo-background-img" src="/images/logo-background.png" alt="Logo" />
                 </div>
-                <p>Join at {mintPrice} ETH per NFT</p>
-                <div className="price">
-                    <input
-                        className="mint-input"
-                        type="number"
-                        value={mintAmount}
-                        onChange={handleMintAmountChange}
-                        min="1"
-                    />
-                    <p className="nft-text">NFT</p>
+                <div className="mint-body2">
+                    <div className="mint-header">
+                        <p>NFT MINT</p>
+                    </div>
+                    <p>Join at {mintPrice} ETH per NFT</p>
+                    <p>Period: -</p>
+                    <p>Contract: 0x12341234...12341234</p>
+                    <div className="price">
+                        <input
+                            className="mint-input"
+                            type="number"
+                            value={mintAmount}
+                            onChange={handleMintAmountChange}
+                            min="1"
+                        />
+                        <p className="nft-text">NFT</p>
+                    </div>
+                    <button className="mint-button" onClick={handleMint} disabled={!defaultAccount}>
+                        Mint NFT
+                    </button>
                 </div>
-                <button className="mint-button" onClick={handleMint} disabled={!defaultAccount}>
-                    Mint NFT
-                </button>
             </div>
         </div>
     );

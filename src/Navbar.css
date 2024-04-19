@@ -1,6 +1,6 @@
 .logo-img {
     width: 40px;
-    margin-right: 6px;
+    margin-right: 8px;
 }
 
 ul {
@@ -23,6 +23,12 @@ ul li a{
 }
 
 ul li a:hover{
-    color: #ff6038;
+    /* color: #ff6038; */
+    color: white;
 }
 
+.Name {
+    font-size: 22px;
+    font-weight:600;
+    margin-right: 100px;
+}

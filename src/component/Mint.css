@@ -1,53 +1,73 @@
 .mint-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: #f4f4f4;
-}
-
-.mint-header {
-  margin-bottom: 50px;
-  font-size: 24px;
-  color: #333;
+  margin-top: 60px;
 }
 
 .mint-body {
-  width: 500px;
-  display: grid;
-  background:  #e17055;
+  display: flex;
+  background: #f39d8b;
   border: 3px solid #ccc;
+  border-radius: 16px;
+  border-color: transparent;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mint-header {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
 }
 
 .price {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+  
+  margin-bottom: 20px;
 }
 
 .mint-input {
-  width: 400px;
+  width: 220px;
   padding: 10px;
-  margin-bottom: 20px;
   border: 2px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
+  border-color: transparent;
 }
 
 .nft-text {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .mint-button {
-  padding: 10px 20px;
+  font-weight: 700;
+  width: 100%;
+  height: 40px;
   border: none;
-  border-radius: 4px;
+  background-color: white;
+  border-radius: 10px;
+  color: #f39d8b;
   cursor: pointer;
   transition: background-color 0.3s;
+ 
+  margin-bottom: 20px;
 }
 
 .mint-button:hover {
-  background-color: #0056b3; /* 호버 시 배경색 변경 */
+  background-color: #e6e6e6;
+}
+
+.mint-body1 {
+  /* width: 440px;  */
+}
+
+.mint-body2 {
+  margin-left: 20px;
+}
+
+.logo-background-img {
+  width: 320px;
+  border-radius: 16px;
 }

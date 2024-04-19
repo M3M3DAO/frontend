@@ -31,13 +31,19 @@
 }
 
 .item:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 
 .btn {
     margin-left: 100px;
-    width: 100px;
+    width: 150px;
+    height: 36px;
+    border-radius: 10px;
+    border-color: transparent;
+    color: #e17055;
+    background-color: white;
+    font-weight: 600;
 }
 
 /* propsal */
