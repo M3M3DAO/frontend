@@ -13,9 +13,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Navibar />}>
-            <Route path="/" element={<Proposal />} />
-            <Route path="funding" element={<Funding />} />
+            <Route path="/" element={<Mint />} />
             <Route path="mint" element={<Mint />} />
+            <Route path="proposal" element={<Proposal />} />
+            <Route path="funding" element={<Funding />} />
           </Route>
         </Routes>
       </BrowserRouter>
