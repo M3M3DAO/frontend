@@ -102,8 +102,9 @@
 }
 
 .project-img {
-    width: 80%;
+    width: 90%;
     height: 50%;
+    border-radius: 10px;
 }
 
 .board-header {
@@ -121,11 +122,23 @@
 }
 
 .price-input {
-    margin-right: 20px;
+    width: 190px;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border-color: transparent;
 }
 
 .board-footer {
     margin-top: 20px;
+}
+
+.board-footer button {
+    border-color: transparent;
+    border-radius: 10px;
+    background-color: white;
+    width: 90%;
+    padding: 10px 0px;
 }
 
 .add-board {

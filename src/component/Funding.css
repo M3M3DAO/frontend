@@ -1,0 +1,22 @@
+.funding {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.funding-board {
+  width: 300px;
+  background-color: #f39d8b;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.funding-board-header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+}

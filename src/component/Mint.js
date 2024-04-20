@@ -54,7 +54,7 @@ function Mint() {
                     <p>Join at {mintPrice} ETH per NFT</p>
                     <p>Period: -</p>
                     <p>Contract: 0x12341234...12341234</p>
-                    <div className="price">
+                    <div className="nft-price">
                         <input
                             className="mint-input"
                             type="number"
