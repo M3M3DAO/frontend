@@ -182,11 +182,11 @@ function Proposal({ type }) {
 
             const transaction = await votingContract.lfg(index, price);
             await transaction.wait();
-            console.log("LFG submit success");
+            console.log("Voting lfg success");
 
             await fetchMetadata();
         } catch (error) {
-            console.error("LFG submit fail: ", error);
+            console.error("Voting lfg fail: ", error);
         }
     };
 
