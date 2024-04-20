@@ -41,16 +41,17 @@
     height: 36px;
     border-radius: 10px;
     border-color: transparent;
-    color: #e17055;
+    color: #f39d8b;
     background-color: white;
     font-weight: 600;
 }
 
 /* propsal */
 .proposal {
-    margin-left: 20px;
     display: flex;
+    align-items: center;
     justify-content: center;
+    margin-top: 60px;
 }
 
 .round {
@@ -66,32 +67,11 @@
 .board {
     width: 300px;
     /* 박스의 너비 */
-    height: 500px;
+    height: 600px;
     /* 박스의 높이 */
-    background-color: #e17055;
+    background-color: #f39d8b;
+    border-radius: 10px;
     /* 박스의 배경색 */
-    border: 3px solid #ccc;
-    /* 박스의 테두리 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* 박스에 그림자 추가 */
-    padding: 20px;
-    /* 내용과 박스 경계 사이의 여백 */
-    margin: 20px;
-    /* 박스 주변의 여백 */
-    display: grid;
-    /* Flexbox를 사용하여 내용을 가운데 정렬 */
-    grid-template-rows: 1fr 5fr 1fr;
-}
-
-.IPFS-board {
-    width: 400px;
-    /* 박스의 너비 */
-    height: 200px;
-    /* 박스의 높이 */
-    background-color: #e17055;
-    /* 박스의 배경색 */
-    border: 3px solid #ccc;
-    /* 박스의 테두리 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     /* 박스에 그림자 추가 */
     padding: 20px;
@@ -108,6 +88,9 @@
 }
 
 .board-header {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
     text-align: center;
 }
 
@@ -121,7 +104,23 @@
     align-items: center;
 }
 
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Link_input {
+    text-align: center;
+    border-radius: 10px;
+    border-color: transparent;
+    padding: 6px 0px;
+    margin-left: 10px;
+    width: 67%;
+}
+
 .price-input {
+    text-align: center;
     width: 190px;
     padding: 10px;
     margin-right: 10px;
@@ -137,8 +136,15 @@
     border-color: transparent;
     border-radius: 10px;
     background-color: white;
+    color: #f39d8b;
+    font-weight: 600;
     width: 90%;
     padding: 10px 0px;
+    margin-bottom: 20px;
+}
+
+.board-footer button:hover {
+    scale: 1.05;
 }
 
 .add-board {
@@ -147,9 +153,35 @@
 }
 
 .add-content {
+    border-color: transparent;
+    background-color: transparent;
+    cursor: pointer;
     font-size: 48px;
+    color: white;
     /* "+" 문자의 크기 설정 */
     text-align: center;
     justify-content: center;
     align-items: center;
+}
+
+.add-content:hover {
+    scale: 1.5;
+}
+
+.submit-button {
+    border-color: transparent;
+    background-color: white;
+    border-radius: 10px;
+
+    font-weight: 600;
+    color: #f39d8b;
+
+    padding: 2px 0px;
+    margin: 20px 0px;
+
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    scale: 1.05;
 }

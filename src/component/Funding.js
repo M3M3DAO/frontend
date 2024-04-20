@@ -15,7 +15,7 @@ function Funding() {
                     <p>total allocation : 100ETH(10%)</p>
                     <p>participant : 10% (100/1000)</p>
                     <div className="price">
-                        <input className="price-input" />
+                        <input className="price-input" value={1} min="1" />
                         <p>NFT</p>
                     </div>
                     <div className="board-footer">

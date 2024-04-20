@@ -30,6 +30,7 @@
 }
 
 .mint-input {
+  text-align: center;
   width: 220px;
   padding: 10px;
   border: 2px solid #ccc;
@@ -56,7 +57,7 @@
 }
 
 .mint-button:hover {
-  background-color: #e6e6e6;
+  scale: 1.05;
 }
 
 .mint-body1 {
