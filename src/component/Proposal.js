@@ -79,7 +79,11 @@ function Proposal({ type }) {
         setShowComponent(false); //버튼 클릭 시 상태 변경하는 함수
     };
 
-    const SubmitButtonClick = async () => {
+    const SubmitButtonClick = () => {
+        setShowComponent(true); //버튼 클릭 시 상태 변경하는 함수
+    };
+
+    const SubmitButton = async () => {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
 
@@ -203,7 +207,7 @@ function Proposal({ type }) {
                                 <p>Allocation : </p>
                                 <input name="allocation" className="Link_input" />
                             </div>
-                            <button className="submit-button" onClick={SubmitButtonClick}>submit</button>
+                            <button className="submit-button" onClick={SubmitButton}>submit</button>
                         </div>
                     </div>
                 )}
