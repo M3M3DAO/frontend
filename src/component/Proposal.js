@@ -1,10 +1,75 @@
 import react, { useState } from "react";
+import { ethers } from 'ethers';
 import "../App.css";
 
 function Proposal({ type }) {
     const [showComponent, setShowComponent] = useState(false); //추가 누를 때 컨포넌트 생성 삭제
     const [inputValue, setInputValue] = useState('') //input value불러올 때
     const [boards, setBoards] = useState([]); // 프로젝트 보드들을 저장할 배열
+
+    const contractAddress = "0x733B3C180eb4357d46E21521009cA718BC82020e"; // 컨트랙트 주소 추가
+    const contractABI = [{
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "string",
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "logo",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "website",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "like",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "supply",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "allocation",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct M3M3Voting.MetaData",
+                "name": "_metadata",
+                "type": "tuple"
+            }
+        ],
+        "name": "submit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "projectId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "votingAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "lfg",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },]; // ABI 추가
 
     const handleInputChange = (event) => {
         // event.target.value를 사용하여 입력값을 가져오고 상태를 업데이트합니다.
@@ -14,8 +79,39 @@ function Proposal({ type }) {
         setShowComponent(false); //버튼 클릭 시 상태 변경하는 함수
     };
 
-    const SubmitButtonClick = () => {
-        setShowComponent(true); //버튼 클릭 시 상태 변경하는 함수
+    const SubmitButtonClick = async () => {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+
+        if (!signer) {
+            console.error("Connect your wallet first");
+            return;
+        }
+
+        console.log(`Submit project.`);
+        try {
+            const votingContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+            const name = document.querySelector('.input-container input[name="name"]').value;
+            const website = document.querySelector('.input-container input[name="website"]').value;
+            const logo = document.querySelector('.input-container input[name="logo"]').value;
+            const supply = document.querySelector('.input-container input[name="supply"]').value;
+            const allocation = document.querySelector('.input-container input[name="allocation"]').value;
+            console.log(`params: ${name} ${website} ${logo} ${supply} ${allocation}`);
+
+            const transaction = await votingContract.submit({
+                name,
+                logo,
+                website,
+                like: 0,
+                supply,
+                allocation,
+            });
+            await transaction.wait();
+            console.log("Voting submit success");
+        } catch (error) {
+            console.error("Voting submit fail: ", error);
+        }
     };
 
     // if (!showComponent) { // + 버튼을 누르면 추가하는 창 생성됨
@@ -49,10 +145,10 @@ function Proposal({ type }) {
                     <p>Project Name</p>
                 </div>
                 <div className="board-body">
-                    <img className="project-img" src="/images/meme.jpg"></img>
+                    <img className="project-img" src="https://github.com/M3M3DAO/nft-images/raw/main/nft1.jpg"></img>
                     <p>Website Link : -</p>
-                    <p>comment : -</p>
                     <p>total allocation : 100ETH(10%)</p>
+                    <p>Like : 1</p>
                     <div className="price">
                         <input className="price-input" value={1} min="1" />
                         <p>NFT</p>
@@ -77,15 +173,15 @@ function Proposal({ type }) {
                         <div className="board">
                             <div className="input-container">
                                 <p>Name : </p>
-                                <input className="Link_input" value={inputValue} onChange={handleInputChange} />
+                                <input name="name" className="Link_input" value={inputValue} onChange={handleInputChange} />
                             </div>
                             <div className="input-container">
                                 <p>Website : </p>
-                                <input className="Link_input" />
+                                <input name="website" className="Link_input" />
                             </div>
                             <div className="input-container">
                                 <p>Logo : </p>
-                                <input className="Link_input" />
+                                <input name="logo" className="Link_input" />
                             </div>
                             <div className="input-container">
                                 <p>X : </p>
@@ -101,11 +197,11 @@ function Proposal({ type }) {
                             </div>
                             <div className="input-container">
                                 <p>Supply : </p>
-                                <input className="Link_input" />
+                                <input name="supply" className="Link_input" />
                             </div>
                             <div className="input-container">
                                 <p>Allocation : </p>
-                                <input className="Link_input" />
+                                <input name="allocation" className="Link_input" />
                             </div>
                             <button className="submit-button" onClick={SubmitButtonClick}>submit</button>
                         </div>

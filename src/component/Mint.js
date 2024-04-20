@@ -8,10 +8,7 @@ function Mint() {
     const [mintAmount, setMintAmount] = useState(1);
     const [defaultAccount, setDefaultAccount] = useState(null);
 
-    const provider = new ethers.JsonRpcProvider(
-        "https://arbitrum-sepolia.blockpi.network/v1/rpc/public"
-    );
-    const contractAddress = "0x10cDed9E35b83fb47d9091005079F5f03408Bdc9"; // 컨트랙트 주소 추가
+    const contractAddress = "0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B"; // 컨트랙트 주소 추가
     const contractABI = [{
         "inputs": [
             {
