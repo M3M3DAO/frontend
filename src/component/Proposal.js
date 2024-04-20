@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import { ethers } from 'ethers';
 import "../App.css";
 
@@ -6,6 +6,7 @@ function Proposal({ type }) {
     const [showComponent, setShowComponent] = useState(false); //추가 누를 때 컨포넌트 생성 삭제
     const [inputValue, setInputValue] = useState('') //input value불러올 때
     const [boards, setBoards] = useState([]); // 프로젝트 보드들을 저장할 배열
+    const [metadata, setMetadata] = useState([]);
 
     const contractAddress = "0x733B3C180eb4357d46E21521009cA718BC82020e"; // 컨트랙트 주소 추가
     const contractABI = [{
@@ -69,6 +70,51 @@ function Proposal({ type }) {
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getMetadataAll",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "string",
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "logo",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "website",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "like",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "supply",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "allocation",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct M3M3Voting.MetaData[]",
+                "name": "metadatas",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
     },]; // ABI 추가
 
     const handleInputChange = (event) => {
@@ -118,6 +164,53 @@ function Proposal({ type }) {
         }
     };
 
+    const SubmitLFG = async (index) => {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+
+        if (!signer) {
+            console.error("Connect your wallet first");
+            return;
+        }
+
+        console.log(`Submit project.`);
+        try {
+            const votingContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+            const price = document.querySelector('.price input[name="price"]').value;
+            console.log(`params: ${index} ${price}`);
+
+            const transaction = await votingContract.lfg(index, price);
+            await transaction.wait();
+            console.log("LFG submit success");
+        } catch (error) {
+            console.error("LFG submit fail: ", error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchMetadata = async () => {
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            const signer = await provider.getSigner();
+
+            if (!signer) {
+                console.error("Connect your wallet first");
+                return;
+            }
+
+            const votingContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+            try {
+                const metadataArray = await votingContract.getMetadataAll();
+                setMetadata(metadataArray);
+            } catch (error) {
+                console.error('Failed to load metadata:', error);
+            }
+        };
+
+        fetchMetadata();
+    }, []);
+
     // if (!showComponent) { // + 버튼을 누르면 추가하는 창 생성됨
     //     return (
     //         <div className="add-board">
@@ -144,27 +237,30 @@ function Proposal({ type }) {
 
     return (
         <div className="proposal">
-            <div className="board">
-                <div className="board-header">
-                    <p>Project Name</p>
+            {metadata.map((data, index) => (
+                <div className="board">
+                    <div key={index} className="metadata-entry">
+                        <div className="board-header">
+                            <p>{data.name}</p>
+                        </div>
+                        <div className="board-body">
+                            <img className="project-img" src={data.logo}></img>
+                            <p>Website Link : {data.website}</p>
+                            <p>Allocation : {data.allocation.toString()} ETH({data.allocation.toString() / data.supply.toString() * 100}%)</p>
+                            <p>Like : {data.like.toString()}</p>
+                            <div className="price">
+                                <input name="price" className="price-input" min="1" />
+                                <p>NFT</p>
+                            </div>
+                            <div className="board-footer">
+                                <button onClick={() => SubmitLFG(index)}>LFG</button>
+                            </div>
+                            <div className="board-add">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="board-body">
-                    <img className="project-img" src="https://github.com/M3M3DAO/nft-images/raw/main/nft1.jpg"></img>
-                    <p>Website Link : -</p>
-                    <p>total allocation : 100ETH(10%)</p>
-                    <p>Like : 1</p>
-                    <div className="price">
-                        <input className="price-input" value={1} min="1" />
-                        <p>NFT</p>
-                    </div>
-                    <div className="board-footer">
-                        <button>fire logo</button>
-                    </div>
-                    <div className="board-add">
-                    </div>
-
-                </div>
-            </div>
+            ))}
             <div>
                 {!showComponent ? (
                     <div className="board">
