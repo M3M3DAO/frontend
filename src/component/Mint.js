@@ -4,9 +4,27 @@ import './Mint.css';
 import MetaMask from '../MetaMask';
 
 function Mint() {
-    const mintPrice = "0.01";
+    const mintPrice = "0.001";
     const [mintAmount, setMintAmount] = useState(1);
     const [defaultAccount, setDefaultAccount] = useState(null);
+
+    const provider = new ethers.JsonRpcProvider(
+        "https://arbitrum-sepolia.blockpi.network/v1/rpc/public"
+    );
+    const contractAddress = "0x10cDed9E35b83fb47d9091005079F5f03408Bdc9"; // 컨트랙트 주소 추가
+    const contractABI = [{
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
+        ],
+        "name": "mint",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },]; // ABI 추가
 
     const handleMintAmountChange = (event) => {
         const value = event.target.value;
@@ -17,20 +35,19 @@ function Mint() {
     };
 
     const handleMint = async () => {
-        if (!defaultAccount) {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+
+        if (!signer) {
             console.error("Connect your wallet first");
             return;
         }
 
         console.log(`Minting ${mintAmount} NFT(s) at ${mintPrice} ETH each.`);
         try {
-            const provider = new ethers.BrowserProvider(window.ethereum);
-            const signer = provider.getSigner(defaultAccount);
-            const contractAddress = ""; // 컨트랙트 주소 추가
-            const contractABI = ""; // ABI 추가
             const nftContract = new ethers.Contract(contractAddress, contractABI, signer);
-
-            alert("Mint 트랜잭션 발생");
+            
+            // alert("Mint 트랜잭션 발생");
             const transaction = await nftContract.mint(mintAmount, {
                 value: ethers.parseEther((mintPrice * mintAmount).toString())
             });
@@ -53,7 +70,7 @@ function Mint() {
                     </div>
                     <p>Join at {mintPrice} ETH per NFT</p>
                     <p>Period: -</p>
-                    <p>Contract: 0x12341234...12341234</p>
+                    <p>Contract: 0x10cDed9E...3408Bdc9</p>
                     <div className="nft-price">
                         <input
                             className="mint-input"
@@ -64,7 +81,7 @@ function Mint() {
                         />
                         <p className="nft-text">NFT</p>
                     </div>
-                    <button className="mint-button" onClick={handleMint} disabled={!defaultAccount}>
+                    <button className="mint-button" onClick={handleMint}>
                         Mint NFT
                     </button>
                 </div>
