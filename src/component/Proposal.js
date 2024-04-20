@@ -177,37 +177,39 @@ function Proposal({ type }) {
         try {
             const votingContract = new ethers.Contract(contractAddress, contractABI, signer);
 
-            const price = document.querySelector('.price input[name="price"]').value;
+            const price = document.querySelector(`.price input[name="${index}"]`).value;
             console.log(`params: ${index} ${price}`);
 
             const transaction = await votingContract.lfg(index, price);
             await transaction.wait();
             console.log("LFG submit success");
+
+            await fetchMetadata();
         } catch (error) {
             console.error("LFG submit fail: ", error);
         }
     };
 
+    const fetchMetadata = async () => {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+
+        if (!signer) {
+            console.error("Connect your wallet first");
+            return;
+        }
+
+        const votingContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        try {
+            const metadataArray = await votingContract.getMetadataAll();
+            setMetadata(metadataArray);
+        } catch (error) {
+            console.error('Failed to load metadata:', error);
+        }
+    };
+    
     useEffect(() => {
-        const fetchMetadata = async () => {
-            const provider = new ethers.BrowserProvider(window.ethereum);
-            const signer = await provider.getSigner();
-
-            if (!signer) {
-                console.error("Connect your wallet first");
-                return;
-            }
-
-            const votingContract = new ethers.Contract(contractAddress, contractABI, signer);
-
-            try {
-                const metadataArray = await votingContract.getMetadataAll();
-                setMetadata(metadataArray);
-            } catch (error) {
-                console.error('Failed to load metadata:', error);
-            }
-        };
-
         fetchMetadata();
     }, []);
 
@@ -249,7 +251,7 @@ function Proposal({ type }) {
                             <p>Allocation : {data.allocation.toString()} ETH({data.allocation.toString() / data.supply.toString() * 100}%)</p>
                             <p>Like : {data.like.toString()}</p>
                             <div className="price">
-                                <input name="price" className="price-input" min="1" />
+                                <input name={index} className="price-input" min="1" />
                                 <p>NFT</p>
                             </div>
                             <div className="board-footer">
