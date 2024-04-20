@@ -4,7 +4,9 @@ import { ethers } from 'ethers';
 import "./Funding.css"
 
 function Funding() {
-    const [metadata, setMetadata] = useState([]);
+    const [metadata, setMetadata] = useState(
+        { allocation: 0, supply: 0 },
+    );
 
     const nftContractAddress = "0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B"; // 컨트랙트 주소 추가
     const nftContractABI = [{
@@ -124,7 +126,7 @@ function Funding() {
 
             const price = document.querySelector(`.price input[name="price"]`).value;
             console.log(`params: ${price}`);
-            
+
             const isApprovedForAll = await nftContract.isApprovedForAll(signer.address, contractAddress);
             console.log(`isApprovedForAll: ${isApprovedForAll}`);
             if (!isApprovedForAll) {
