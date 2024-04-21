@@ -5,7 +5,7 @@ import "./Funding.css"
 
 function Funding() {
     const [metadata, setMetadata] = useState(
-        { allocation: 0, supply: 0 },
+        { allocation: 0, supply: 0, participant: 0 },
     );
 
     const nftContractAddress = "0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B"; // 컨트랙트 주소 추가
@@ -51,7 +51,7 @@ function Funding() {
         "type": "function"
     },]; // ABI 추가
 
-    const contractAddress = "0x733B3C180eb4357d46E21521009cA718BC82020e"; // 컨트랙트 주소 추가
+    const contractAddress = "0xd0cF7C434bbA6Ae95e9580ea0dC3020255D2fBa1"; // 컨트랙트 주소 추가
     const contractABI = [{
         "inputs": [
             {
@@ -98,6 +98,11 @@ function Funding() {
                     {
                         "internalType": "uint256",
                         "name": "allocation",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "participant",
                         "type": "uint256"
                     }
                 ],
@@ -178,7 +183,7 @@ function Funding() {
                     <img className="project-img" src={metadata.logo}></img>
                     <p>Website Link : {metadata.website}</p>
                     <p>Allocation : {metadata.allocation.toString()} ETH({metadata.allocation.toString() / metadata.supply.toString() * 100}%)</p>
-                    <p>Participant : 10%(100/{metadata.allocation.toString() * 100})</p>
+                    <p>Participant : {metadata.participant.toString() / (metadata.allocation.toString() * 100)}%({metadata.participant.toString()}/{metadata.allocation.toString() * 100})</p>
                     <div className="price">
                         <input name="price" className="price-input" min="1" />
                         <p>NFT</p>

@@ -8,7 +8,7 @@ function Proposal({ type }) {
     const [boards, setBoards] = useState([]); // 프로젝트 보드들을 저장할 배열
     const [metadata, setMetadata] = useState([]);
 
-    const contractAddress = "0x733B3C180eb4357d46E21521009cA718BC82020e"; // 컨트랙트 주소 추가
+    const contractAddress = "0xd0cF7C434bbA6Ae95e9580ea0dC3020255D2fBa1"; // 컨트랙트 주소 추가
     const contractABI = [{
         "inputs": [
             {
@@ -41,6 +41,11 @@ function Proposal({ type }) {
                     {
                         "internalType": "uint256",
                         "name": "allocation",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "participant",
                         "type": "uint256"
                     }
                 ],
@@ -106,6 +111,11 @@ function Proposal({ type }) {
                         "internalType": "uint256",
                         "name": "allocation",
                         "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "participant",
+                        "type": "uint256"
                     }
                 ],
                 "internalType": "struct M3M3Voting.MetaData[]",
@@ -156,9 +166,13 @@ function Proposal({ type }) {
                 like: 0,
                 supply,
                 allocation,
+                participant: 0,
             });
             await transaction.wait();
             console.log("Voting submit success");
+     
+            await fetchMetadata();
+            setShowComponent(false);
         } catch (error) {
             console.error("Voting submit fail: ", error);
         }
@@ -208,7 +222,7 @@ function Proposal({ type }) {
             console.error('Failed to load metadata:', error);
         }
     };
-    
+
     useEffect(() => {
         fetchMetadata();
     }, []);
@@ -239,78 +253,80 @@ function Proposal({ type }) {
 
     return (
         <div className="proposal">
-            {metadata.map((data, index) => (
-                <div className="board">
-                    <div key={index} className="metadata-entry">
-                        <div className="board-header">
-                            <p>{data.name}</p>
-                        </div>
-                        <div className="board-body">
-                            <img className="project-img" src={data.logo}></img>
-                            <p>Website Link : {data.website}</p>
-                            <p>Allocation : {data.allocation.toString()} ETH({data.allocation.toString() / data.supply.toString() * 100}%)</p>
-                            <p>Like : {data.like.toString()}</p>
-                            <div className="price">
-                                <input name={index} className="price-input" min="1" />
-                                <p>NFT</p>
-                            </div>
-                            <div className="board-footer">
-                                <button onClick={() => SubmitLFG(index)}>LFG</button>
-                            </div>
-                            <div className="board-add">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ))}
-            <div>
-                {!showComponent ? (
+            <div className="board-container">
+                {metadata.map((data, index) => (
                     <div className="board">
-                        <button className="add-content" onClick={SubmitButtonClick}>
-                            +
-                        </button>
-                    </div>
-                ) : (
-                    <div className="add-board">
-                        <div className="board">
-                            <div className="input-container">
-                                <p>Name : </p>
-                                <input name="name" className="Link_input" value={inputValue} onChange={handleInputChange} />
+                        <div key={index} className="metadata-entry">
+                            <div className="board-header">
+                                <p>{data.name}</p>
                             </div>
-                            <div className="input-container">
-                                <p>Website : </p>
-                                <input name="website" className="Link_input" />
+                            <div className="board-body">
+                                <img className="project-img" src={data.logo}></img>
+                                <p>Website Link : {data.website}</p>
+                                <p>Allocation : {data.allocation.toString()} ETH({data.allocation.toString() / data.supply.toString() * 100}%)</p>
+                                <p>Like : {data.like.toString()}</p>
+                                <div className="price">
+                                    <input name={index} className="price-input" min="1" />
+                                    <p>NFT</p>
+                                </div>
+                                <div className="board-footer">
+                                    <button onClick={() => SubmitLFG(index)}>LFG</button>
+                                </div>
+                                <div className="board-add">
+                                </div>
                             </div>
-                            <div className="input-container">
-                                <p>Logo : </p>
-                                <input name="logo" className="Link_input" />
-                            </div>
-                            <div className="input-container">
-                                <p>X : </p>
-                                <input className="Link_input" />
-                            </div>
-                            <div className="input-container">
-                                <p>Discord : </p>
-                                <input className="Link_input" />
-                            </div>
-                            <div className="input-container">
-                                <p>Comment : </p>
-                                <input className="Link_input" />
-                            </div>
-                            <div className="input-container">
-                                <p>Supply : </p>
-                                <input name="supply" className="Link_input" />
-                            </div>
-                            <div className="input-container">
-                                <p>Allocation : </p>
-                                <input name="allocation" className="Link_input" />
-                            </div>
-                            <button className="submit-button" onClick={SubmitButton}>submit</button>
                         </div>
                     </div>
-                )}
-            </div>
+                ))}
+                <div>
+                    {!showComponent ? (
+                        <div className="board">
+                            <button className="add-content" onClick={SubmitButtonClick}>
+                                +
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="add-board">
+                            <div className="board">
+                                <div className="input-container">
+                                    <p>Name : </p>
+                                    <input name="name" className="Link_input" value={inputValue} onChange={handleInputChange} />
+                                </div>
+                                <div className="input-container">
+                                    <p>Website : </p>
+                                    <input name="website" className="Link_input" />
+                                </div>
+                                <div className="input-container">
+                                    <p>Logo : </p>
+                                    <input name="logo" className="Link_input" />
+                                </div>
+                                <div className="input-container">
+                                    <p>X : </p>
+                                    <input className="Link_input" />
+                                </div>
+                                <div className="input-container">
+                                    <p>Discord : </p>
+                                    <input className="Link_input" />
+                                </div>
+                                <div className="input-container">
+                                    <p>Comment : </p>
+                                    <input className="Link_input" />
+                                </div>
+                                <div className="input-container">
+                                    <p>Supply : </p>
+                                    <input name="supply" className="Link_input" />
+                                </div>
+                                <div className="input-container">
+                                    <p>Allocation : </p>
+                                    <input name="allocation" className="Link_input" />
+                                </div>
+                                <button className="submit-button" onClick={SubmitButton}>submit</button>
+                            </div>
+                        </div>
+                    )}
+                </div>
 
+            </div>
         </div>
 
     );
