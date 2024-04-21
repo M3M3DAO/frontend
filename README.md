@@ -10,13 +10,15 @@ https://github.com/M3M3DAO/m3m3-contract
 # Contract Address 
 
 (Arbitrum)
+```
 NFT: 0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B
-Dao: 0xd0cF7C434bbA6Ae95e9580ea0dC3020255D2fBa1
-
+Vote: 0xd0cF7C434bbA6Ae95e9580ea0dC3020255D2fBa1
+```
 (Avail)
+```
 NFT: 0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B
-Dao: 0xE54b29c5ee96Be7893374650Ee29bA6B682714b7
-
+Vote: 0xE54b29c5ee96Be7893374650Ee29bA6B682714b7
+```
 # verified in Scan (Avail)
 https://op-avail-sepolia-explorer.alt.technology/address/0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B?tab=contract
 
