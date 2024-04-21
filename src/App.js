@@ -10,7 +10,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      {/* <BrowserRouter basename="webapp">  */}
+      <BrowserRouter basename="/"> 
         <Routes>
           <Route element={<Navibar />}>
             <Route path="/" element={<Mint />} />

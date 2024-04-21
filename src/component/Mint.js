@@ -59,7 +59,7 @@ function Mint() {
         <div className="mint-container">
             <div className="mint-body">
                 <div className="mint-body1">
-                    <img className="logo-background-img" src="/images/logo-background.png" alt="Logo" />
+                    <img className="logo-background-img" src="https://github.com/M3M3DAO/nft-images/raw/main/logo-background.png" alt="Logo" />
                 </div>
                 <div className="mint-body2">
                     <div className="mint-header">

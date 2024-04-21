@@ -11,7 +11,7 @@ function Navibar(props) {
             <nav>
                 <ul>
                     <li>
-                        <img className="logo-img" src="/images/logo.png" alt="Logo" />
+                        <img className="logo-img" src="https://github.com/M3M3DAO/nft-images/raw/main/logo.png" alt="Logo" />
                     </li>
                     <li className="Name">
                         MEMEDAO
