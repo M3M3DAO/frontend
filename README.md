@@ -12,12 +12,6 @@ https://github.com/M3M3DAO/webapp
 # Explain
 Project Usese React, and solidity to make a system. We make UI and UX simple to make user easy to particiapte. User could send Ethereum and min NFT that could be worked as an vote method. When user gets nft to votes they could vote with nft according to their voted numbers. Anyone could register project to proposals and all the data is recorede to smart contract. User could buy 1st ranked project meme coin. Buying means burn nft and get erc20 tokens.
 
-# Demo
-https://m3m3dao.github.io/webapp/
-
-# Contract Repo
-https://github.com/M3M3DAO/m3m3-contract
-
 # Contract Address 
 
 (Arbitrum)
