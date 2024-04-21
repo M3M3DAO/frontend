@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# M3M3 DAO
+Project Usese React, and solidity to make a system. We make UI and UX simple to make user easy to particiapte. User could send Ethereum and min NFT that could be worked as an vote method. When user gets nft to votes they could vote with nft according to their voted numbers. Anyone could register project to proposals and all the data is recorede to smart contract. User could buy 1st ranked project meme coin. Buying means burn nft and get erc20 tokens.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Demo
+https://github.com/M3M3DAO/webapp
 
-## Available Scripts
+# Contract Repo
+https://github.com/M3M3DAO/m3m3-contract
 
-In the project directory, you can run:
+# Contract Address 
 
-### `npm start`
+(Arbitrum)
+NFT: 0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B
+Dao: 0xd0cF7C434bbA6Ae95e9580ea0dC3020255D2fBa1
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+(Avail)
+NFT: 0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B
+Dao: 0xE54b29c5ee96Be7893374650Ee29bA6B682714b7
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# verified in Scan (Avail)
+https://op-avail-sepolia-explorer.alt.technology/address/0x714eD56B2dA2f6CF4A583507bF3CF15313989E1B?tab=contract
 
-### `npm test`
+https://op-avail-sepolia-explorer.alt.technology/address/0xE54b29c5ee96Be7893374650Ee29bA6B682714b7?tab=contract
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Sequance Diagram
 
-### `npm run build`
+``` mermaid
+sequenceDiagram
+    participant User
+    participant M3M3Voting
+    participant M3M3NFT
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    User ->> M3M3Voting: A. Submit Project Metadata
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    User ->> M3M3NFT: B-1. Send Eth and Mint NFT
+    M3M3NFT -->> User: B-2. tranfer NFT
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    User ->> M3M3Voting: C-1. Vote for a Project with NFT
+    M3M3Voting ->> M3M3Voting : C-2. get 1st ranked meme coin
+    User ->> M3M3Voting: C-3. Buy 1st ranked Meme Coin with NFT
+    User ->> M3M3NFT: C-4. Transfer NFT to Contract
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    User ->> M3M3Voting: D-1. Burn NFT
+    M3M3Voting ->> M3M3NFT:  D-2. Burn NFT
+    M3M3Voting ->> User: D-3. Transfer Meme Coin to User
+```
